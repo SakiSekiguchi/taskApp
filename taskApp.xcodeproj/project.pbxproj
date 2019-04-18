@@ -76,12 +76,12 @@
 			children = (
 				E83502A222657E7D003E9566 /* AppDelegate.swift */,
 				E83502A422657E7D003E9566 /* ViewController.swift */,
+				E83502B422659680003E9566 /* inputViewController.swift */,
+				E85054442266E1D90080A03E /* Task.swift */,
 				E83502A622657E7D003E9566 /* Main.storyboard */,
 				E83502A922657E7F003E9566 /* Assets.xcassets */,
 				E83502AB22657E7F003E9566 /* LaunchScreen.storyboard */,
 				E83502AE22657E7F003E9566 /* Info.plist */,
-				E83502B422659680003E9566 /* inputViewController.swift */,
-				E85054442266E1D90080A03E /* Task.swift */,
 			);
 			path = taskApp;
 			sourceTree = "<group>";

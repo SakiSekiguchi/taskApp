@@ -10,13 +10,18 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-
-    @IBOutlet weak var tableView: UITableView!
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating {
     
     let realm = try! Realm()
-    
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date",ascending: false)
+    var searchResults:[String] = []
+    var searchController = UISearchController()
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBAction func tapToBack(_ segue: UIStoryboardSegue){
+        //taskArray = realm.objects(Task.self)
+    }
     
     
     override func viewDidLoad() {
@@ -24,6 +29,29 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //検索バー
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.sizeToFit()
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+    
+    }
+    
+    //文字が入力されるたびに呼ばれる
+    func updateSearchResults(for searchController: UISearchController) {
+        self.searchResults = taskArray.filter{
+            //大文字小文字区別せず検索
+            $0..contains(searchController.searchBar.text!.lowercased())
+        }
+        self.tableView.reloadData()
+    }
+    
+    //テーブル更新
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // MARK: UITableViewDataSourceプロトコルのメソッド

@@ -25,15 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         
         center.delegate = self
         
-        let documentDirPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        print(documentDirPath)
+       let documentDirPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+            print(documentDirPath)
         
         return true
     }
     
+    //フォアグラウンド：見ているとき
     // アプリがフォアグラウンドの時に通知を受け取ると呼ばれるメソッド
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        //ユーザにy通知の許可を求める
+        //ユーザに通知の許可を求める
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.sound,.alert]){
             (granted, error) in

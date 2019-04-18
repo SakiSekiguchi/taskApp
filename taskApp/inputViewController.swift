@@ -15,11 +15,10 @@ class inputViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var dataPicker: UIDatePicker!
+    @IBOutlet weak var categoryText: UITextField!
     
     var task: Task!
     let realm = try! Realm()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,18 +38,24 @@ class inputViewController: UIViewController {
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         dataPicker.date = task.date
+        categoryText.text = task.category
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        try! realm.write {
-//            self.task.title = self.titleTextField.text!
-//            self.task.contents = self.contentsTextView.text
-//            self.task.date = self.dataPicker.date
-//            self.realm.add(self.task,update: true)
-//        }
     
+        //データベースに挿入
+        try! realm.write {
+            self.task.title = self.titleTextField.text!
+            self.task.contents = self.contentsTextView.text
+            self.task.date = self.dataPicker.date
+            self.task.category = self.categoryText.text!
+            self.realm.add(self.task,update: true)
+        }
+        
         setNotification(task:task)
         super.viewWillDisappear(animated)
+        
     }
     
     //タスクのローカル通知を登録する
@@ -99,16 +104,8 @@ class inputViewController: UIViewController {
         
     }
     
-    //押されたら登録
-    @IBAction func insertButton(_ sender: Any) {
-        
-        try! realm.write {
-            self.task.title = self.titleTextField.text!
-            self.task.contents = self.contentsTextView.text
-            self.task.date = self.dataPicker.date
-            self.realm.add(self.task,update: true)
-        }
-        
+    @IBAction func tapInsertButton(_ sender: Any) {
+        viewWillDisappear(true)
     }
     
     @objc func dismissKeyboard(){
