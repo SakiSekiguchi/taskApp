@@ -14,6 +14,7 @@
 		E83502AA22657E7F003E9566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83502A922657E7F003E9566 /* Assets.xcassets */; };
 		E83502AD22657E7F003E9566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E83502AB22657E7F003E9566 /* LaunchScreen.storyboard */; };
 		E83502B522659680003E9566 /* inputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83502B422659680003E9566 /* inputViewController.swift */; };
+		E85054452266E1D90080A03E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85054442266E1D90080A03E /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E83502AC22657E7F003E9566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E83502AE22657E7F003E9566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E83502B422659680003E9566 /* inputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputViewController.swift; sourceTree = "<group>"; };
+		E85054442266E1D90080A03E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				E83502AB22657E7F003E9566 /* LaunchScreen.storyboard */,
 				E83502AE22657E7F003E9566 /* Info.plist */,
 				E83502B422659680003E9566 /* inputViewController.swift */,
+				E85054442266E1D90080A03E /* Task.swift */,
 			);
 			path = taskApp;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E85054452266E1D90080A03E /* Task.swift in Sources */,
 				E83502A522657E7D003E9566 /* ViewController.swift in Sources */,
 				E83502A322657E7D003E9566 /* AppDelegate.swift in Sources */,
 				E83502B522659680003E9566 /* inputViewController.swift in Sources */,
