@@ -21,14 +21,18 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6wg-EX-pts">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="k2G-cp-DJK">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" showsCancelButton="YES" id="k2G-cp-DJK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    <scopeButtonTitles>
+                                        <string>Title</string>
+                                        <string>Title</string>
+                                    </scopeButtonTitles>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="AJw-Qh-dDC" detailTextLabel="nQO-Jn-6eG" style="IBUITableViewCellStyleSubtitle" id="tTg-Up-fZ9">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="84" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tTg-Up-fZ9" id="0bj-0r-pNj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -73,8 +77,9 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="6wg-EX-pts" id="8eu-6X-8zG"/>
-                        <segue destination="s5a-fd-3OP" kind="show" identifier="cellSegue" id="8rh-l0-2vl"/>
+                        <outlet property="searchBar" destination="k2G-cp-DJK" id="3Uv-H3-nrm"/>
+                        <outlet property="tableView" destination="6wg-EX-pts" id="bAX-4t-GNX"/>
+                        <segue destination="s5a-fd-3OP" kind="show" identifier="cellSegue" id="Cht-SG-eMd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -130,7 +135,7 @@
                                 <rect key="frame" x="314" y="527" width="31" height="30"/>
                                 <state key="normal" title="登録"/>
                                 <connections>
-                                    <action selector="tapInsertButton:" destination="s5a-fd-3OP" eventType="touchUpInside" id="Fay-1b-Dhf"/>
+                                    <action selector="tapInsertButton:" destination="s5a-fd-3OP" eventType="touchUpInside" id="dvH-5W-VLk"/>
                                     <segue destination="9lf-v6-3X6" kind="unwind" unwindAction="tapToBack:" id="T46-91-IUT"/>
                                 </connections>
                             </button>
@@ -176,10 +181,10 @@
                         <viewLayoutGuide key="safeArea" id="hKt-lh-RuK"/>
                     </view>
                     <connections>
-                        <outlet property="categoryText" destination="MHy-ft-5JF" id="b24-VQ-D3e"/>
-                        <outlet property="contentsTextView" destination="eGr-Tc-Nbg" id="IQx-xI-Ft8"/>
-                        <outlet property="dataPicker" destination="xk2-00-VFt" id="eNv-MT-A8q"/>
-                        <outlet property="titleTextField" destination="XeV-qn-zhj" id="yDq-I6-NRA"/>
+                        <outlet property="categoryText" destination="MHy-ft-5JF" id="ZDc-Pi-aRM"/>
+                        <outlet property="contentsTextView" destination="eGr-Tc-Nbg" id="f3f-iZ-87A"/>
+                        <outlet property="dataPicker" destination="xk2-00-VFt" id="kDg-Jx-oGF"/>
+                        <outlet property="titleTextField" destination="XeV-qn-zhj" id="afh-s5-yhT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WnV-Nd-70v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,6 +212,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8rh-l0-2vl"/>
+        <segue reference="g2A-Vg-VAV"/>
     </inferredMetricsTieBreakers>
 </document>

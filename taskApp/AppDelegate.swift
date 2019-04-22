@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate {
 
@@ -16,17 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        //ユーザーに通知の許可を求める
+        
+        // ユーザに通知の許可を求める
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert,.sound]){
-            (granted,error) in
+        center.requestAuthorization(options: [.sound, .alert]) { (granted, error) in
+            // Enable or disable features based on authorization
         }
-        
-        center.delegate = self
-        
-       let documentDirPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-            print(documentDirPath)
+        center.delegate = self     
         
         return true
     }

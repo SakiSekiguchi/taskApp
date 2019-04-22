@@ -10,48 +10,52 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     
     let realm = try! Realm()
+    //タスクデータ配列
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date",ascending: false)
-    var searchResults:[String] = []
-    var searchController = UISearchController()
+    //検索結果配列
+    var resultArray = [Task]()
+    
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
+    //戻る
     @IBAction func tapToBack(_ segue: UIStoryboardSegue){
-        //taskArray = realm.objects(Task.self)
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //デリゲート結びつけ
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         
-        //検索バー
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.sizeToFit()
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
+        //デフォルトテキスト
+        searchBar.placeholder = "ここに入力してください"
+        
+        //検索キャンセル非表示
+        //searchBar.showsCancelButton = false
+        //何も入力されていなくてもReturnキーを押せるようにする。
+        searchBar.enablesReturnKeyAutomatically = false
+        
+        //データをコピー
+        //resultArray = taskArray
+        
     
-    }
-    
-    //文字が入力されるたびに呼ばれる
-    func updateSearchResults(for searchController: UISearchController) {
-        self.searchResults = taskArray.filter{
-            //大文字小文字区別せず検索
-            $0..contains(searchController.searchBar.text!.lowercased())
-        }
-        self.tableView.reloadData()
     }
     
     //テーブル更新
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+
+        
     }
     
     // MARK: UITableViewDataSourceプロトコルのメソッド
@@ -119,6 +123,37 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 }
             }
     }
+    }
+    
+    
+        
+    
+    //検索ボタン押した時
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let realm = try! Realm()
+        let searchText:String = searchBar.text!
+
+        
+        if searchText.isEmpty{
+            taskArray = realm.objects(Task.self)
+        }else{
+            taskArray = realm.objects(Task.self).filter("category BEGINSWITH %@", searchText)
+        }
+        
+        tableView.reloadData()
+        
+    }
+    
+//    //編集中キャンセル有効
+//    func  handleKeyboardWillShowNotification(notification: NSNotification){
+//        searchBar.showsCancelButton = true
+//    }
+    
+    //キャンセルたっぷ
+    func searchBarCancelButtonClicked(_ searchBar:UISearchBar) {
+        searchBar.text = ""
+        //searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
     }
     
     //segueで遷移するときに呼ばれる
