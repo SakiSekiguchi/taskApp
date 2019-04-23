@@ -13,10 +13,11 @@ import UserNotifications
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     
     let realm = try! Realm()
+    
     //タスクデータ配列
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date",ascending: false)
     //検索結果配列
-    var resultArray = [Task]()
+    var resultArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false )
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -40,12 +41,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         searchBar.placeholder = "ここに入力してください"
         
         //検索キャンセル非表示
-        //searchBar.showsCancelButton = false
+        searchBar.showsCancelButton = false
         //何も入力されていなくてもReturnキーを押せるようにする。
         searchBar.enablesReturnKeyAutomatically = false
         
         //データをコピー
-        //resultArray = taskArray
+        resultArray = taskArray
         
     
     }
@@ -125,15 +126,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     }
     
-    
+    //検索バー文字入力時
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool{
+        
+        searchBar.showsCancelButton = true
+        return true
+    }
         
     
     //検索ボタン押した時
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let realm = try! Realm()
         let searchText:String = searchBar.text!
-
-        
         if searchText.isEmpty{
             taskArray = realm.objects(Task.self)
         }else{
@@ -144,16 +148,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
     
-//    //編集中キャンセル有効
-//    func  handleKeyboardWillShowNotification(notification: NSNotification){
-//        searchBar.showsCancelButton = true
-//    }
-    
     //キャンセルたっぷ
     func searchBarCancelButtonClicked(_ searchBar:UISearchBar) {
         searchBar.text = ""
-        //searchBar.showsCancelButton = false
+        searchBar.showsCancelButton = false
+        taskArray = realm.objects(Task.self)
         searchBar.resignFirstResponder()
+        tableView.reloadData()
+        
     }
     
     //segueで遷移するときに呼ばれる
